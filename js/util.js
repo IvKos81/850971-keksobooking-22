@@ -29,4 +29,19 @@ function getRandomCoordinate(num1, num2, x) {
   }
 }
 
-export {getRandomNumber, getRandomCoordinate}
+// Функция проверки массива на повторяющиеся значения
+
+function checkArr(arr) {
+  for(let i=0; i<arr.length; i++){
+    for(let j=i+1; j<arr.length; j++){
+      if (arr[i] === arr[j]) {
+        arr.splice(i,1);
+      }
+    }
+  }
+  return arr
+}
+
+export {getRandomNumber, getRandomCoordinate, checkArr}
+
+
