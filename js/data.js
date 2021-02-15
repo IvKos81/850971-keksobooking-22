@@ -61,5 +61,5 @@ function boardOfAdverts() {
   return new Array(NUMBER_OF_ADVERTS).fill(null).map(() => {return createAdvert()});
 }
 
-boardOfAdverts()
+export {boardOfAdverts}
 
