@@ -51,15 +51,22 @@ similarAdverts.forEach( function(adv) {
 
   advertElement.querySelector('.popup__features').innerHTML = '';
   for (let i=0; i<adv.offer.features.length; i++) {
-    advertElement.querySelector('.popup__features').innerHTML += '<li class="popup__feature popup__feature--'+adv.offer.features[i]+'"></li>';
+    let featurePict = document.createElement('li');
+    featurePict.classList.add('popup__feature');
+    featurePict.classList.add(`popup__feature--${adv.offer.features[i]}`);
+    advertElement.querySelector('.popup__features').appendChild(featurePict);
   }
 
   advertElement.querySelector('.popup__description').textContent = adv.offer.description;
 
-  advertElement.querySelector('.popup__photos').innerHTML = '';
   for (let j=0; j<adv.offer.photos.length; j++) {
-    advertElement.querySelector('.popup__photos').innerHTML += '<img src="'+adv.offer.photos[j]+'" class="popup__photo" width="45" height="40" alt="Фотография жилья">'
+    let photoPict = advertElement.querySelector('.popup__photo').cloneNode();
+    photoPict.setAttribute('src', `${adv.offer.photos[j]}`)
+    advertElement.querySelector('.popup__photos').appendChild(photoPict);
   }
+  let photoGallery = advertElement.querySelectorAll('.popup__photo');
+  advertElement.querySelector('.popup__photos').removeChild(photoGallery[0]);
+
   // отрисовка объявления в поле карты
 
   mapCanvas.appendChild(advertElement);
