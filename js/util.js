@@ -42,6 +42,32 @@ function checkArr(arr) {
   return arr
 }
 
-export {getRandomNumber, getRandomCoordinate, checkArr}
+//перевод элементов в неактивное состояние
+
+function setInActive() {
+  document.querySelector('.ad-form').classList.add('ad-form--disabled');
+  document.querySelector('.map__filters').classList.add('map__filters--disabled');
+  document.querySelectorAll('fieldset').forEach((evt) => {
+    evt.setAttribute('disabled', 'disabled')
+  });
+  document.querySelectorAll('.map__filter').forEach((evt) => {
+    evt.setAttribute('disabled', 'disabled')
+  });
+}
+
+// Перевод элементов в активное состояние
+
+function setActive() {
+  document.querySelector('.ad-form').classList.remove('ad-form--disabled');
+  document.querySelector('.map__filters').classList.remove('map__filters--disabled');
+  document.querySelectorAll('fieldset').forEach((evt) => {
+    evt.removeAttribute('disabled')
+  });
+  document.querySelectorAll('.map__filter').forEach((evt) => {
+    evt.removeAttribute('disabled')
+  });
+}
+
+export {getRandomNumber, getRandomCoordinate, checkArr, setInActive, setActive}
 
 

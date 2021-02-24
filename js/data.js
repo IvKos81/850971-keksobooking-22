@@ -19,7 +19,7 @@ const NUMBER_OF_ADVERTS = 10;
 function createAdvert() {
   let randomAvatar = 'img/avatars/user0'+getRandomNumber(0,9)+'.png';
   let randomTitleIndex = getRandomNumber(0, TITLES.length-1);
-  let randomPrice = getRandomNumber(100,10000)+' dollars';
+  let randomPrice = getRandomNumber(100,10000);
   let randomTypeIndex = getRandomNumber(0,TYPES.length-1);
   let randomRooms = getRandomNumber(1,10);
   let randomGuests = getRandomNumber(1,10);
@@ -51,8 +51,8 @@ function createAdvert() {
       photos: randomPhotosChecked},
 
     location: {
-      x: randomLattitude,
-      y: randomLongitude}}
+      lat: randomLattitude,
+      lng: randomLongitude}}
 }
 
 //Генерация массива объявлений на Кексобукинге

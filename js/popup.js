@@ -2,20 +2,15 @@
 
 import {boardOfAdverts} from './data.js'
 
-// Поиск в разметке блока отрисовки карты и шаблона
-
-const mapCanvas = document.querySelector('.map__canvas');
-
-
-const popupTemplate = document.querySelector('#card')
-
 // Запуск функции генерации массива объявлений
 
 const similarAdverts = boardOfAdverts();
 
-// Перебор объектов массива объявлений с присвоением индивидуальных значений на основе шаблона #card, где adv - объект объявления в массиве
+// Функция для создания объявления на основе шаблона
 
-similarAdverts.forEach( function(adv) {
+function createAdvertElement(adv) {
+
+  const popupTemplate = document.querySelector('#card')
 
   //клонирование дочерных элементов шаблона (Веб-компонент)
 
@@ -67,7 +62,7 @@ similarAdverts.forEach( function(adv) {
   let photoGallery = advertElement.querySelectorAll('.popup__photo');
   advertElement.querySelector('.popup__photos').removeChild(photoGallery[0]);
 
-  // отрисовка объявления в поле карты
+  return advertElement
+}
 
-  mapCanvas.appendChild(advertElement);
-})
+export {similarAdverts, createAdvertElement}
