@@ -68,6 +68,40 @@ function setActive() {
   });
 }
 
-export {getRandomNumber, getRandomCoordinate, checkArr, setInActive, setActive}
+// создание шаблона сообщений
+
+const successMessageTemplate = document.querySelector('#success');
+
+const errorMessageTemplate = document.querySelector('#error');
+
+const mainElement = document.querySelector('main')
+
+function createStatusMessage(template) {
+  const templateStatusMessage = template.content.cloneNode(true);
+
+  mainElement.append(templateStatusMessage);
+
+  document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Escape') {
+      templateStatusMessage.remove()
+    }
+  })
+}
+
+function showGoodSendMessage() {
+  createStatusMessage(successMessageTemplate)
+}
+
+// сообщение об ошибке отправки
+
+function showBadSendMessage() {
+  createStatusMessage(errorMessageTemplate)
+}
+
+function showBadReceiveMessage() {
+  alert('Произошла ошибка загрузки данных')
+}
+
+export {getRandomNumber, getRandomCoordinate, checkArr, setInActive, setActive, showGoodSendMessage, showBadSendMessage, showBadReceiveMessage}
 
 
