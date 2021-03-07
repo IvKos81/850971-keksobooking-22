@@ -5,7 +5,6 @@ function getData(onSuccess, onFail) {
     .then((response) => response.json())
     .then((data) => onSuccess(data))
     .catch(() => {
-      onSuccess();
       onFail();
     });
 }

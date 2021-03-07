@@ -2,8 +2,9 @@
 
 // отмена отправки формы по умолчанию и отправка методом Fetch
 
+import {resetMainMarker } from './map.js';
 import {sendData} from './server.js'
-import {showGoodSendMessage, showBadSendMessage} from './util.js'
+import {showGoodSendMessage, showBadSendMessage, resetForm} from './util.js'
 
 const adForm = document.querySelector('.ad-form');
 
@@ -14,3 +15,9 @@ adForm.addEventListener('submit', function(evt) {
 
   sendData (showGoodSendMessage, showBadSendMessage, formData);
 });
+
+document.querySelector('.ad-form__reset').addEventListener('click', function(evt){
+  evt.preventDefault();
+  resetForm();
+  resetMainMarker();
+})

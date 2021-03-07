@@ -61,5 +61,12 @@ function boardOfAdverts() {
   return new Array(NUMBER_OF_ADVERTS).fill(null).map(() => {return createAdvert()});
 }
 
-export {boardOfAdverts}
+// Данные для отрисовки карты
+
+const ADDRESS = document.querySelector('#address');
+ADDRESS.setAttribute('readonly', true)
+const LAT = 35.681700;
+const LNG = 139.75388;
+
+export {boardOfAdverts, ADDRESS, LAT, LNG}
 

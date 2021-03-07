@@ -1,3 +1,6 @@
+import {ADDRESS, LAT, LNG} from './data.js'
+//import { MAIN_PIN_MARKER } from './map.js';
+
 //Вспомогательные функции
 
 function getRandomNumber(num1, num2) {
@@ -81,27 +84,85 @@ function createStatusMessage(template) {
 
   mainElement.append(templateStatusMessage);
 
-  document.addEventListener('keydown', function(evt) {
-    if (evt.key === 'Escape') {
-      templateStatusMessage.remove()
-    }
-  })
 }
+
+
+// сообщение об успешной отправке
 
 function showGoodSendMessage() {
   createStatusMessage(successMessageTemplate)
+
+  let goodSendMessage = document.querySelector('.success');
+
+  document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Escape') {
+      goodSendMessage.remove()
+    }
+  })
+
+  document.addEventListener('click', function() {
+    goodSendMessage.remove()
+  })
 }
 
 // сообщение об ошибке отправки
 
 function showBadSendMessage() {
   createStatusMessage(errorMessageTemplate)
+
+  let badSendMessage = document.querySelector('.error');
+
+  document.addEventListener('keydown', function(evt) {
+    if (evt.key === 'Escape') {
+      badSendMessage.remove()
+    }
+  })
+
+  document.addEventListener('click', function() {
+    badSendMessage.remove()
+  })
+
+  document.querySelector('.error__button').addEventListener('click', function(){
+    badSendMessage.remove()
+  })
+
 }
+
+// сообщение об ошибке получения данных
 
 function showBadReceiveMessage() {
-  alert('Произошла ошибка загрузки данных')
+  //alert('Произошла ошибка загрузки данных')
+
+  const alertContainer = document.createElement('div');
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = 0;
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '10px 3px';
+  alertContainer.style.fontSize = '30px';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'red';
+
+  alertContainer.textContent = 'Произошла ошибка загрузки данных';
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, 5000);
 }
 
-export {getRandomNumber, getRandomCoordinate, checkArr, setInActive, setActive, showGoodSendMessage, showBadSendMessage, showBadReceiveMessage}
+
+// очистка формы
+
+function resetForm() {
+  document.querySelector('.ad-form').reset()
+  ADDRESS.value = `${LAT}, ${LNG}`;
+  // MAIN_PIN_MARKER.lat = LAT;
+  // MAIN_PIN_MARKER.lng = LNG;
+}
+
+export {getRandomNumber, getRandomCoordinate, checkArr, setInActive, setActive, showGoodSendMessage, showBadSendMessage, showBadReceiveMessage, resetForm}
 
 
