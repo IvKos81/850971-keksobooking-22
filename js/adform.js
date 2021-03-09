@@ -31,6 +31,8 @@ const accomodationPrice = document.querySelector('#price')
 
 accomodationPrice.setAttribute('required', 'true');
 accomodationPrice.setAttribute('max', '1000000');
+accomodationPrice.setAttribute('type', 'number');
+
 
 accomodationType.addEventListener('change',(evt) => {
   switch(evt.target.value) {
@@ -59,3 +61,34 @@ timeOut.addEventListener('change',(evt) => {
     case '14:00' : timeIn.value = '14:00'; break
   }
 })
+
+// Валидация полей формы по заданию module6-task2
+
+const roomNumber = document.querySelector('#room_number');
+const guestCapacity = document.querySelector('#capacity');
+
+roomNumber.addEventListener('change', (evt) => {
+  if (evt.target.value === '1') {
+    guestCapacity.innerHTML =''
+    guestCapacity.add(new Option('для 1 гостя', ('value', 1)))
+  } else if (evt.target.value === '2') {
+    guestCapacity.innerHTML =''
+    guestCapacity.add(new Option('для 2 гостей', ('value', 2)))
+    guestCapacity.add(new Option('для 1 гостя', ('value', 1)))
+  } else if (evt.target.value === '3') {
+    guestCapacity.innerHTML =''
+    guestCapacity.add(new Option('для 3 гостей', ('value', 3)))
+    guestCapacity.add(new Option('для 2 гостей', ('value', 2)))
+    guestCapacity.add(new Option('для 1 гостя', ('value', 1)))
+  } else if (evt.target.value === '100') {
+    guestCapacity.innerHTML =''
+    guestCapacity.add(new Option('не для гостей', ('value', 0)))
+  }
+});
+
+const advertTitle = document.querySelector('#title')
+
+advertTitle.setAttribute('required', 'true');
+advertTitle.setAttribute('min', '30');
+advertTitle.setAttribute('max', '100');
+
