@@ -2,80 +2,14 @@
 import {createAdvertElement} from './popup.js'
 import {setInActive, setActive} from './util.js'
 import {ADDRESS, LAT, LNG} from './data.js'
+import {filterOffers} from './filter.js'
 
 setInActive()
 
 // создание и отрисовка карты с помощью Leaflet
 
-// function createMap (array) {
-//   const MAP = L.map('map-canvas').on('load', () => {
-//     ADDRESS.value = `${LAT}, ${LNG}`;
-//     setActive();
-//   }).setView({
-//     lat: LAT,
-//     lng: LNG,
-//   },12);
+/*Данные для отрисовки карты */
 
-//   L.tileLayer(
-//     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-//     {
-//       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//     },
-//   ).addTo(MAP);
-
-//   // создание главного маркера
-
-//   const MAIN_PIN_ICON = L.icon({
-//     iconUrl:'img/main-pin.svg',
-//     iconSize:[52,52],
-//     iconAnchor: [26,52],
-//   });
-
-//   const MAIN_PIN_MARKER = L.marker({
-//     lat: LAT,
-//     lng: LNG,
-//   },
-//   {
-//     draggable: true,
-//     icon: MAIN_PIN_ICON,
-//   },
-//   );
-
-//   MAIN_PIN_MARKER.addTo(MAP).bindPopup('Координаты: '+ADDRESS.value)
-
-//   MAIN_PIN_MARKER.on('move',(evt) => {
-//     let latlng = evt.target.getLatLng();
-//     let lat = latlng.lat.toFixed(5);
-//     let lng = latlng.lng.toFixed(5);
-//     ADDRESS.value = `${lat}, ${lng}`;
-//   })
-
-//   // генерация маркеров для случайных объявлений
-
-//   array.forEach((adv) => {
-
-//     // eslint-disable-next-line no-undef
-//     const MARKER_PIN_ICON = L.icon({
-//       iconUrl:'img/pin.svg',
-//       iconSize:[40,40],
-//       iconAnchor:[20,40],
-//     });
-
-//     const MARKER = L.marker({
-//       lat: adv.location.lat,
-//       lng: adv.location.lng,
-//     },
-//     {
-//       icon: MARKER_PIN_ICON,
-//     },
-//     );
-//     MARKER.addTo(MAP).bindPopup(createAdvertElement(adv),{keepInView: true});
-//   });
-
-//   return MAP
-// }
-
-//Альтернативная функция карты
 const MAP = L.map('map-canvas').on('load', () => {
   ADDRESS.value = `${LAT}, ${LNG}`;
   setActive();
@@ -118,12 +52,16 @@ MAIN_PIN_MARKER.on('move',(evt) => {
   ADDRESS.value = `${lat}, ${lng}`;
 })
 
+const MARKERS = L.layerGroup().addTo(MAP);
 
+//генерация маркеров для случайных объявлений
 
-function createMap(array) {
-  array.forEach((adv) => {
+function renderMarkers(array) {
 
-    // eslint-disable-next-line no-undef
+  // при запуске функции происходит удаление слоя маркеров объявлений, потом идет фильтрация массива в соответствии с установленными значениями фильтров, потом идет отрисовка отфильтрованных маркеров
+
+  resetMarkers()
+  filterOffers(array).slice(0,10).forEach((adv) => {
     const MARKER_PIN_ICON = L.icon({
       iconUrl:'img/pin.svg',
       iconSize:[40,40],
@@ -138,14 +76,21 @@ function createMap(array) {
       icon: MARKER_PIN_ICON,
     },
     );
-    MARKER.addTo(MAP).bindPopup(createAdvertElement(adv),{keepInView: true});
+    MARKER.addTo(MARKERS).bindPopup(createAdvertElement(adv),{keepInView: true});
   });
-
-  return MAP
 }
+
+/* Сброс списка маркеров*/
+
+function resetMarkers() {
+  MARKERS.clearLayers();
+}
+
+/* Сброс главного маркера на начальное значение*/
+
 
 function resetMainMarker() {
   MAIN_PIN_MARKER.setLatLng([LAT, LNG]);
 }
 
-export {createMap, resetMainMarker}
+export {renderMarkers, resetMainMarker}
