@@ -68,5 +68,10 @@ ADDRESS.setAttribute('readonly', true)
 const LAT = 35.681700;
 const LNG = 139.75388;
 
-export {boardOfAdverts, ADDRESS, LAT, LNG}
+// данные для устранения "дребезга"
+
+const RERENDER_DELAY = 500;
+
+
+export {boardOfAdverts, ADDRESS, LAT, LNG, RERENDER_DELAY}
 

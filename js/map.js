@@ -52,10 +52,11 @@ MAIN_PIN_MARKER.on('move',(evt) => {
   ADDRESS.value = `${lat}, ${lng}`;
 })
 
-//функция рендера маркеров для случайных объявлений
-
+// данные для отрисовки случайных маркеров
 
 const MARKERS = L.layerGroup().addTo(MAP);
+
+//генерация маркеров для случайных объявлений
 
 function renderMarkers(array) {
 
@@ -78,10 +79,8 @@ function renderMarkers(array) {
       icon: MARKER_PIN_ICON,
     },
     );
-    MARKER.addTo(MARKERS).bindPopup(createAdvertElement(adv),{keepInView: true,
-    });
+    MARKER.addTo(MARKERS).bindPopup(createAdvertElement(adv),{keepInView: true});
   });
-
 }
 
 /* Сброс списка маркеров*/
