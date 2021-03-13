@@ -69,7 +69,7 @@ function getFilteredData(array) {
   const filteredRooms = setRoomsFilter(array);
   const filteredGuests = setGuestsFilter(array);
   const filteredFeatures = setFeaturesFilter(array)
-  return filteredHouse&&filteredPrice&&filteredRooms&&filteredGuests&&filteredFeatures;
+  return filteredHouse&&filteredPrice&&filteredRooms&&filteredGuests&&filteredFeatures
 }
 
 // функция фильтрации загружаемого массива данных (будет применена в renderAdverts)

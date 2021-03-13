@@ -63,6 +63,7 @@ function renderMarkers(array) {
   // при запуске функции происходит удаление слоя маркеров объявлений, потом идет фильтрация массива в соответствии с установленными значениями фильтров, потом идет отрисовка отфильтрованных маркеров
 
   resetMarkers()
+
   filterOffers(array).slice(0,10).forEach((adv) => {
     const MARKER_PIN_ICON = L.icon({
       iconUrl:'img/pin.svg',
@@ -89,7 +90,6 @@ function resetMarkers() {
 }
 
 /* Сброс главного маркера на начальное значение*/
-
 
 function resetMainMarker() {
   MAIN_PIN_MARKER.setLatLng([LAT, LNG]);
