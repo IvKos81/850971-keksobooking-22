@@ -15,5 +15,5 @@ import {RERENDER_DELAY} from './data.js'
 
 getData( function(array) {
   renderMarkers(array)
-  changeFilter(_.debounce((function() {renderMarkers(array)}),RERENDER_DELAY))
-},showBadReceiveMessage)
+  changeFilter(_.debounce((function() {renderMarkers(array)}), RERENDER_DELAY))
+}, showBadReceiveMessage)

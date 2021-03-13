@@ -82,10 +82,10 @@ function filterOffers(array) {
 
 function changeFilter(cb) {
   housingFilter.addEventListener('change', function() {cb()})
-  priceFilter.addEventListener('change',function(){cb()})
-  roomsFilter.addEventListener('change',function(){cb()})
-  guestsFilter.addEventListener('change',function(){cb()})
-  featuresFilter.addEventListener('change',function(){cb()})
+  priceFilter.addEventListener('change', function(){cb()})
+  roomsFilter.addEventListener('change', function(){cb()})
+  guestsFilter.addEventListener('change', function(){cb()})
+  featuresFilter.addEventListener('change', function(){cb()})
 }
 
 export {filterOffers, changeFilter}

@@ -52,6 +52,8 @@ MAIN_PIN_MARKER.on('move',(evt) => {
   ADDRESS.value = `${lat}, ${lng}`;
 })
 
+// данные для отрисовки случайных маркеров
+
 const MARKERS = L.layerGroup().addTo(MAP);
 
 //генерация маркеров для случайных объявлений
