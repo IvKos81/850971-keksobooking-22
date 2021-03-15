@@ -5,6 +5,7 @@
 import {resetMainMarker } from './map.js';
 import {sendData} from './server.js'
 import {showGoodSendMessage, showBadSendMessage, resetForm} from './util.js'
+import {resetAvatar} from './avatar.js'
 
 // отмена отправки формы по умолчанию и отправка методом Fetch
 
@@ -22,6 +23,7 @@ document.querySelector('.ad-form__reset').addEventListener('click', function(evt
   evt.preventDefault();
   resetForm();
   resetMainMarker();
+  resetAvatar();
 })
 
 // Валидация полей формы по заданию module5-task2

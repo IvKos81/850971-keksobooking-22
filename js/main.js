@@ -6,6 +6,7 @@ import './map.js'
 import './server.js'
 import './adform.js'
 import './filter.js'
+import './avatar.js'
 
 import {getData} from './server.js'
 import {renderMarkers} from './map.js'
