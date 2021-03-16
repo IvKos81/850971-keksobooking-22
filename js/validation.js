@@ -28,7 +28,19 @@ function advertTitleValidation() {
 // Валидация цены за ночь
 
 function accomodationPriceValidation() {
-  if (accomodationPrice.value > MAX_PRICE) {
+  if (accomodationType.value === 'bungalow' && accomodationPrice.value > 0) {
+    accomodationPrice.setCustomValidity('Минимальная цена не может быть выше 0 рублей');
+  }
+  else if (accomodationType.value === 'flat' && accomodationPrice.value > 1000) {
+    accomodationPrice.setCustomValidity('Минимальная цена не может быть выше 1000 рублей');
+  }
+  else if (accomodationType.value === 'house' && accomodationPrice.value > 5000) {
+    accomodationPrice.setCustomValidity('Минимальная цена не может быть выше 5000 рублей');
+  }
+  else if (accomodationType.value === 'palace' && accomodationPrice.value > 10000) {
+    accomodationPrice.setCustomValidity('Минимальная цена не может быть выше 10000 рублей');
+  }
+  else if (accomodationPrice.value > MAX_PRICE) {
     accomodationPrice.setCustomValidity('Значение цены не должно превышать 1 000 000 руб.')
   } else {
     accomodationPrice.setCustomValidity('')
