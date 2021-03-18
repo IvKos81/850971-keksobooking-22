@@ -5,6 +5,7 @@ import './popup.js'
 import './map.js'
 import './server.js'
 import './adform.js'
+import './validation.js'
 import './filter.js'
 import './avatar.js'
 
