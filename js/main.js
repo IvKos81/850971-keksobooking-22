@@ -7,6 +7,7 @@ import './server.js'
 import './adform.js'
 import './validation.js'
 import './filter.js'
+import './avatar.js'
 
 import {getData} from './server.js'
 import {renderMarkers} from './map.js'

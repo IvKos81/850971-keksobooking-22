@@ -3,7 +3,9 @@
 import {resetMainMarker } from './map.js';
 import {sendData} from './server.js'
 import {showGoodSendMessage, showBadSendMessage, resetForm} from './util.js'
+import {resetAvatar} from './avatar.js'
 import {accomodationPrice, DEFAULT_PRICE} from './validation.js'
+
 
 // отмена отправки формы по умолчанию и отправка методом Fetch
 
@@ -21,4 +23,5 @@ document.querySelector('.ad-form__reset').addEventListener('click', function(evt
   resetForm();
   accomodationPrice.placeholder = DEFAULT_PRICE;
   resetMainMarker();
+  resetAvatar();
 })
