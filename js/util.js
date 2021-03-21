@@ -1,9 +1,12 @@
+'use strict';
+
 import {ADDRESS, LAT, LNG} from './data.js'
-//import { MAIN_PIN_MARKER } from './map.js';
 
 //Вспомогательные функции
 
-function getRandomNumber(num1, num2) {
+// Функция генерации случайного целого числа
+
+const getRandomNumber = function(num1, num2) {
   num1 = Math.ceil(num1);
   num2 = Math.floor(num2);
 
@@ -18,9 +21,9 @@ function getRandomNumber(num1, num2) {
   }
 }
 
-/* Функция, возвращающая случайное число с плавающей точкой из переданного диапазона. */
+// Функция, возвращающая случайное число с плавающей точкой из переданного диапазона.
 
-function getRandomCoordinate(num1, num2, x) {
+const getRandomCoordinate = function(num1, num2, x) {
   if (num1>=0 && num2>0) {
     if ((num1 === num2) || (num1 > num2)) {
       return 'Диапазон задан неверно'
@@ -34,7 +37,7 @@ function getRandomCoordinate(num1, num2, x) {
 
 // Функция проверки массива на повторяющиеся значения
 
-function checkArr(arr) {
+const checkDuplicatesInArray =  function(arr) {
   for(let i=0; i<arr.length; i++){
     for(let j=i+1; j<arr.length; j++){
       if (arr[i] === arr[j]) {
@@ -47,7 +50,7 @@ function checkArr(arr) {
 
 //перевод элементов в неактивное состояние
 
-function setInActive() {
+const setInActive = function() {
   document.querySelector('.ad-form').classList.add('ad-form--disabled');
   document.querySelector('.map__filters').classList.add('map__filters--disabled');
   document.querySelectorAll('fieldset').forEach((evt) => {
@@ -60,7 +63,7 @@ function setInActive() {
 
 // Перевод элементов в активное состояние
 
-function setActive() {
+const setActive = function() {
   document.querySelector('.ad-form').classList.remove('ad-form--disabled');
   document.querySelector('.map__filters').classList.remove('map__filters--disabled');
   document.querySelectorAll('fieldset').forEach((evt) => {
@@ -79,9 +82,9 @@ const errorMessageTemplate = document.querySelector('#error');
 
 const mainElement = document.querySelector('main')
 
-function createStatusMessage(template) {
-  const templateStatusMessage = template.content.cloneNode(true);
+const createStatusMessage = function(template) {
 
+  const templateStatusMessage = template.content.cloneNode(true);
   mainElement.append(templateStatusMessage);
 
 }
@@ -89,7 +92,8 @@ function createStatusMessage(template) {
 
 // сообщение об успешной отправке
 
-function showGoodSendMessage() {
+const showGoodSendMessage = function() {
+
   createStatusMessage(successMessageTemplate)
 
   let goodSendMessage = document.querySelector('.success');
@@ -107,7 +111,8 @@ function showGoodSendMessage() {
 
 // сообщение об ошибке отправки
 
-function showBadSendMessage() {
+const showBadSendMessage = function() {
+
   createStatusMessage(errorMessageTemplate)
 
   let badSendMessage = document.querySelector('.error');
@@ -130,10 +135,10 @@ function showBadSendMessage() {
 
 // сообщение об ошибке получения данных
 
-function showBadReceiveMessage() {
-  //alert('Произошла ошибка загрузки данных')
+const showBadReceiveMessage = function() {
 
   const alertContainer = document.createElement('div');
+
   alertContainer.style.zIndex = 100;
   alertContainer.style.position = 'absolute';
   alertContainer.style.left = 0;
@@ -153,16 +158,13 @@ function showBadReceiveMessage() {
   }, 5000);
 }
 
-
 // очистка формы
 
-function resetForm() {
+const resetForm = function() {
   document.querySelector('.ad-form').reset()
   ADDRESS.value = `${LAT}, ${LNG}`;
-  // MAIN_PIN_MARKER.lat = LAT;
-  // MAIN_PIN_MARKER.lng = LNG;
 }
 
-export {getRandomNumber, getRandomCoordinate, checkArr, setInActive, setActive, showGoodSendMessage, showBadSendMessage, showBadReceiveMessage, resetForm}
+export {getRandomNumber, getRandomCoordinate, checkDuplicatesInArray, setInActive, setActive, showGoodSendMessage, showBadSendMessage, showBadReceiveMessage, resetForm}
 
 

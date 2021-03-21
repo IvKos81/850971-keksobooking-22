@@ -1,14 +1,16 @@
+'use strict';
+
 // Файл для генерации разметки похожих объявлений на основе данных.
 
-import {boardOfAdverts} from './data.js'
+import {createBoardOfAdverts} from './data.js'
 
 // Запуск функции генерации массива объявлений
 
-const similarAdverts = boardOfAdverts();
+const similarAdverts = createBoardOfAdverts();
 
 // Функция для создания объявления на основе шаблона
 
-function createAdvertElement(adv) {
+const createAdvertElement = function(adv) {
 
   const popupTemplate = document.querySelector('#card')
 
@@ -30,7 +32,9 @@ function createAdvertElement(adv) {
     case 'house' : advertElement.querySelector('.popup__type').textContent = 'Дом'; break
     case 'palace' : advertElement.querySelector('.popup__type').textContent = 'Дворец'; break
   }
+
   let numbOfRooms
+
   if (adv.offer.rooms !== 1) {
     if (adv.offer.rooms>4) {
       numbOfRooms = 'комнат'

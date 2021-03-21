@@ -1,62 +1,52 @@
+'use strict';
+
 // Загрузка аватара и фото на страницу
 
 //Данные для загрузки файлов
 
-const fileChooser = document.querySelector('.ad-form-header__input');
+const avatarChooser = document.querySelector('.ad-form-header__input');
 
-const preview = document.querySelector('.ad-form-header__preview__avatar');
+const previewAvatar = document.querySelector('.ad-form-header__preview__avatar');
 
-const filePhotoChooser = document.querySelector('.ad-form__input');
+const photoChooser = document.querySelector('.ad-form__input');
 
 const previewPhoto = document.querySelector('.ad-form__photo__pict');
 
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'bmp']
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'bmp', 'png']
 
-// Загрузка аватара
+// Функция загрузки аватара или фото помещения
 
-fileChooser.addEventListener('change', () => {
-  const file = fileChooser.files[0];
-  const fileName = file.name.toLowerCase();
+const onLoadPhoto = (fileChooser, preview) => {
+  fileChooser.addEventListener('change', () => {
+    const file = fileChooser.files[0];
+    const fileName = file.name.toLowerCase();
 
-  const MATCHES = FILE_TYPES.some((it) => {
-    return fileName.endsWith(it)
-  });
-
-  if (MATCHES) {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => {
-      preview.src = reader.result;
+    const MATCHES = FILE_TYPES.some((it) => {
+      return fileName.endsWith(it)
     });
-    reader.readAsDataURL(file);
-  }
 
-})
+    if (MATCHES) {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        preview.src = reader.result;
+      });
+      reader.readAsDataURL(file);
+      preview.classList.remove('visually-hidden');
+    }
+  })
+}
 
-// Загрузка фото жилья на страницу
+// Функция удаления фото при очистке формы
 
-filePhotoChooser.addEventListener('change', () => {
-  const filePhoto = filePhotoChooser.files[0];
-  const filePhotoName = filePhoto.name.toLowerCase();
-
-  const MATCHES = FILE_TYPES.some((it) => {
-    return filePhotoName.endsWith(it)
-  });
-
-  if (MATCHES) {
-    const readerPhoto = new FileReader();
-    readerPhoto.addEventListener('load', () => {
-      previewPhoto.src = readerPhoto.result;
-    });
-    readerPhoto.readAsDataURL(filePhoto);
-    previewPhoto.classList.remove('visually-hidden')
-  }
-
-})
-
-function resetAvatar() {
-  preview.src = 'img/muffin-grey.svg';
+const resetAvatar = function() {
+  previewAvatar.src = 'img/muffin-grey.svg';
   previewPhoto.src = '';
   previewPhoto.classList.add('visually-hidden');
 }
+
+// Запуск загрузки фото на страницу
+
+onLoadPhoto(avatarChooser, previewAvatar);
+onLoadPhoto(photoChooser, previewPhoto);
 
 export {resetAvatar}
