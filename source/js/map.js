@@ -1,12 +1,14 @@
-/* eslint-disable no-undef */
+/* global L:readonly */
+'use strict';
+
+// создание и отрисовка карты с помощью Leaflet
+
 import {createAdvertElement} from './popup.js'
 import {setInActive, setActive} from './util.js'
 import {ADDRESS, LAT, LNG} from './data.js'
 import {filterOffers} from './filter.js'
 
 setInActive()
-
-// создание и отрисовка карты с помощью Leaflet
 
 /*Данные для отрисовки карты */
 
@@ -58,7 +60,7 @@ const MARKERS = L.layerGroup().addTo(MAP);
 
 //генерация маркеров для случайных объявлений
 
-function renderMarkers(array) {
+const renderMarkers = function(array) {
 
   // при запуске функции происходит удаление слоя маркеров объявлений, потом идет фильтрация массива в соответствии с установленными значениями фильтров, потом идет отрисовка отфильтрованных маркеров
 
@@ -85,13 +87,13 @@ function renderMarkers(array) {
 
 /* Сброс списка маркеров*/
 
-function resetMarkers() {
+const resetMarkers = function() {
   MARKERS.clearLayers();
 }
 
 /* Сброс главного маркера на начальное значение*/
 
-function resetMainMarker() {
+const resetMainMarker = function() {
   MAIN_PIN_MARKER.setLatLng([LAT, LNG]);
 }
 

@@ -1,6 +1,8 @@
+'use strict';
+
 //Запрос данных с сервера
 
-function getData(onSuccess, onFail) {
+const getDataFromServer = function(onSuccess, onFail) {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
     .then((data) => onSuccess(data))
@@ -11,7 +13,7 @@ function getData(onSuccess, onFail) {
 
 // Отправка данных на сервер
 
-function sendData(onSuccess, onFail, body) {
+const sendDataToServer = function(onSuccess, onFail, body) {
   fetch('https://22.javascript.pages.academy/keksobooking', {
     method: 'POST',
     body,
@@ -26,4 +28,4 @@ function sendData(onSuccess, onFail, body) {
     .catch(() => onFail());
 }
 
-export {getData, sendData}
+export {getDataFromServer, sendDataToServer}
