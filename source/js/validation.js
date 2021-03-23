@@ -2,21 +2,21 @@
 
 // Валидация формы
 
-const advertTitle = document.querySelector('#title')
-const accomodationType = document.querySelector('#type')
-const accomodationPrice = document.querySelector('#price')
+const advertTitle = document.querySelector('#title');
+const accomodationType = document.querySelector('#type');
+const accomodationPrice = document.querySelector('#price');
 const DEFAULT_PRICE = 5000;
 const MIN_NAME_LENGTH = 30;
 const MAX_NAME_LENGTH = 100;
 const MAX_PRICE = 1000000;
-const timeIn = document.querySelector('#timein')
-const timeOut = document.querySelector('#timeout')
+const timeIn = document.querySelector('#timein');
+const timeOut = document.querySelector('#timeout');
 const roomNumber = document.querySelector('#room_number');
 const guestCapacity = document.querySelector('#capacity');
 
 // Валидация заголовка
 
-const checkAdvertTitleValidation = function() {
+const checkAdvertTitleValidation = () => {
   if (advertTitle.validity.rangeUnderflow) {
     advertTitle.setCustomValidity('Заголовок должен содержать не менее '+MIN_NAME_LENGTH+' символов')
   } else if (advertTitle.validity.rangeOverflow) {
@@ -25,11 +25,11 @@ const checkAdvertTitleValidation = function() {
     advertTitle.setCustomValidity('')
   }
   advertTitle.reportValidity();
-}
+};
 
 // Валидация цены за ночь
 
-const checkAccomodationPriceValidation = function() {
+const checkAccomodationPriceValidation = () => {
   if (accomodationType.value === 'bungalow' && accomodationPrice.value < 0) {
     accomodationPrice.setCustomValidity('Минимальная цена не может быть ниже 0 рублей');
   }
@@ -43,62 +43,61 @@ const checkAccomodationPriceValidation = function() {
     accomodationPrice.setCustomValidity('Минимальная цена не может быть ниже 10000 рублей');
   }
   else if (accomodationPrice.value > MAX_PRICE) {
-    accomodationPrice.setCustomValidity('Значение цены не должно превышать 1 000 000 руб.')
+    accomodationPrice.setCustomValidity('Значение цены не должно превышать 1 000 000 руб.');
   } else {
-    accomodationPrice.setCustomValidity('')
+    accomodationPrice.setCustomValidity('');
   }
 
-  accomodationPrice.reportValidity()
-}
+  accomodationPrice.reportValidity();
+};
 
 // Валидация тип жилья - цена за ночь
 
-const checkAccomodationTypeValidation = function() {
+const checkAccomodationTypeValidation = () => {
   switch(accomodationType.value) {
     case 'bungalow' : accomodationPrice.setAttribute('placeholder', '0'); break
     case 'flat' : accomodationPrice.setAttribute('placeholder', '1000'); break
     case 'house' : accomodationPrice.setAttribute('placeholder', '5000'); break
     case 'palace' : accomodationPrice.setAttribute('placeholder', '10000'); break
   }
-}
+};
 
 // Валидация время заезда - время выезда
 
-const checkTimeInValidation = function() {
+const checkTimeInValidation = () => {
   switch(timeIn.value) {
     case '12:00' : timeOut.value = '12:00'; break
     case '13:00' : timeOut.value = '13:00'; break
     case '14:00' : timeOut.value = '14:00'; break
   }
-}
+};
 
-const checkTimeOutValidation = function() {
+const checkTimeOutValidation = () => {
   switch(timeOut.value) {
     case '12:00' : timeIn.value = '12:00'; break
     case '13:00' : timeIn.value = '13:00'; break
     case '14:00' : timeIn.value = '14:00'; break
   }
-}
+};
 
 // Валидация количества комнат и количества гостей
 
-const checkGuestRoomAndCapacityValidation = function() {
+const checkGuestRoomAndCapacityValidation = () => {
 
   if (roomNumber.value === '100' && guestCapacity.value !== '0' ) {
-    guestCapacity.setCustomValidity('Выберите пункт "Не для гостей ')
-    //roomNumber.setCustomValidity('Не для гостей')
+    guestCapacity.setCustomValidity('Выберите пункт "Не для гостей ');
   }
 
   else if (roomNumber.value === '3' && guestCapacity.value === '0') {
-    guestCapacity.setCustomValidity('Вы можете выбрать не более 3 гостей ')
+    guestCapacity.setCustomValidity('Вы можете выбрать не более 3 гостей ');
   }
 
   else if (roomNumber.value === '2' && (guestCapacity.value > '2' || guestCapacity.value < '1') ) {
-    guestCapacity.setCustomValidity('Вы можете выбрать не более 2 гостей')
+    guestCapacity.setCustomValidity('Вы можете выбрать не более 2 гостей');
   }
 
   else if (roomNumber.value === '1' && guestCapacity.value !== '1') {
-    guestCapacity.setCustomValidity('Вы можете выбрать только 1 гостя')
+    guestCapacity.setCustomValidity('Вы можете выбрать только 1 гостя');
   }
 
   else {guestCapacity.setCustomValidity('')}
@@ -109,7 +108,7 @@ const checkGuestRoomAndCapacityValidation = function() {
 
 // Запуск функции для валидации комнат и гостей "на лету"
 
-checkGuestRoomAndCapacityValidation()
+checkGuestRoomAndCapacityValidation();
 
 // Валидация при вводе/изменении данных
 
@@ -118,8 +117,8 @@ accomodationType.addEventListener('change', checkAccomodationTypeValidation);
 accomodationPrice.addEventListener('input', checkAccomodationPriceValidation);
 timeIn.addEventListener('change', checkTimeInValidation);
 timeOut.addEventListener('change', checkTimeOutValidation);
-roomNumber.addEventListener('change', checkGuestRoomAndCapacityValidation)
-guestCapacity.addEventListener('change', checkGuestRoomAndCapacityValidation)
+roomNumber.addEventListener('change', checkGuestRoomAndCapacityValidation);
+guestCapacity.addEventListener('change', checkGuestRoomAndCapacityValidation);
 
-export {accomodationPrice, DEFAULT_PRICE}
+export {accomodationPrice, DEFAULT_PRICE};
 

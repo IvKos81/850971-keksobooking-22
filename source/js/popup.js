@@ -1,18 +1,10 @@
 'use strict';
 
-// Файл для генерации разметки похожих объявлений на основе данных.
-
-import {createBoardOfAdverts} from './data.js'
-
-// Запуск функции генерации массива объявлений
-
-const similarAdverts = createBoardOfAdverts();
-
 // Функция для создания объявления на основе шаблона
 
-const createAdvertElement = function(adv) {
+const createAdvertElement = (adv) => {
 
-  const popupTemplate = document.querySelector('#card')
+  const popupTemplate = document.querySelector('#card');
 
   //клонирование дочерных элементов шаблона (Веб-компонент)
 
@@ -33,18 +25,18 @@ const createAdvertElement = function(adv) {
     case 'palace' : advertElement.querySelector('.popup__type').textContent = 'Дворец'; break
   }
 
-  let numbOfRooms
+  let numberOfRooms;
 
   if (adv.offer.rooms !== 1) {
     if (adv.offer.rooms>4) {
-      numbOfRooms = 'комнат'
+      numberOfRooms === 'комнат';
     } else {
-      numbOfRooms = 'комнаты'}
+      numberOfRooms === 'комнаты';}
   } else {
-    numbOfRooms = 'комната'
+    numberOfRooms === 'комната';
   }
 
-  advertElement.querySelector('.popup__text--capacity').textContent = adv.offer.rooms+' '+numbOfRooms+' для '+adv.offer.guests+' гостей';
+  advertElement.querySelector('.popup__text--capacity').textContent = adv.offer.rooms+' '+numberOfRooms+' для '+adv.offer.guests+' гостей';
 
   advertElement.querySelector('.popup__text--time').textContent = 'Заезд после '+adv.offer.checkin+' , выезд до '+adv.offer.checkout;
 
@@ -57,7 +49,6 @@ const createAdvertElement = function(adv) {
   }
 
   advertElement.querySelector('.popup__description').textContent = adv.offer.description;
-
   for (let j=0; j<adv.offer.photos.length; j++) {
     let photoPict = advertElement.querySelector('.popup__photo').cloneNode();
     photoPict.setAttribute('src', `${adv.offer.photos[j]}`)
@@ -66,7 +57,7 @@ const createAdvertElement = function(adv) {
   let photoGallery = advertElement.querySelectorAll('.popup__photo');
   advertElement.querySelector('.popup__photos').removeChild(photoGallery[0]);
 
-  return advertElement
-}
+  return advertElement;
+};
 
-export {similarAdverts, createAdvertElement}
+export {createAdvertElement};

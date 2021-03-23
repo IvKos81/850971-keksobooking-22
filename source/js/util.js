@@ -1,56 +1,14 @@
 'use strict';
 
-import {ADDRESS, LAT, LNG} from './data.js'
+import {ADDRESS, LAT, LNG} from './map.js';
 
-//Вспомогательные функции
-
-// Функция генерации случайного целого числа
-
-const getRandomNumber = function(num1, num2) {
-  num1 = Math.ceil(num1);
-  num2 = Math.floor(num2);
-
-  if (num1>=0 && num2>0) {
-    if ((num1 === num2) || (num1 > num2)) {
-      return 'Диапазон задан неверно'
-    } else {
-      return Math.floor(Math.random() * (num2 - num1)) + num1;
-    }
-  } else {
-    return 'Диапазон содержит отрицательное значение'
-  }
-}
-
-// Функция, возвращающая случайное число с плавающей точкой из переданного диапазона.
-
-const getRandomCoordinate = function(num1, num2, x) {
-  if (num1>=0 && num2>0) {
-    if ((num1 === num2) || (num1 > num2)) {
-      return 'Диапазон задан неверно'
-    } else {
-      return ((Math.random() * (num2 - num1)) + num1).toFixed(x);
-    }
-  } else {
-    return 'Диапазон содержит отрицательное значение'
-  }
-}
-
-// Функция проверки массива на повторяющиеся значения
-
-const checkDuplicatesInArray =  function(arr) {
-  for(let i=0; i<arr.length; i++){
-    for(let j=i+1; j<arr.length; j++){
-      if (arr[i] === arr[j]) {
-        arr.splice(i,1);
-      }
-    }
-  }
-  return arr
-}
+const successMessageTemplate = document.querySelector('#success');
+const errorMessageTemplate = document.querySelector('#error');
+const mainElement = document.querySelector('main');
 
 //перевод элементов в неактивное состояние
 
-const setInActive = function() {
+const setInActive = () => {
   document.querySelector('.ad-form').classList.add('ad-form--disabled');
   document.querySelector('.map__filters').classList.add('map__filters--disabled');
   document.querySelectorAll('fieldset').forEach((evt) => {
@@ -59,11 +17,11 @@ const setInActive = function() {
   document.querySelectorAll('.map__filter').forEach((evt) => {
     evt.setAttribute('disabled', 'disabled')
   });
-}
+};
 
 // Перевод элементов в активное состояние
 
-const setActive = function() {
+const setActive = () => {
   document.querySelector('.ad-form').classList.remove('ad-form--disabled');
   document.querySelector('.map__filters').classList.remove('map__filters--disabled');
   document.querySelectorAll('fieldset').forEach((evt) => {
@@ -76,66 +34,58 @@ const setActive = function() {
 
 // создание шаблона сообщений
 
-const successMessageTemplate = document.querySelector('#success');
-
-const errorMessageTemplate = document.querySelector('#error');
-
-const mainElement = document.querySelector('main')
-
-const createStatusMessage = function(template) {
-
+const createStatusMessage = (template) => {
   const templateStatusMessage = template.content.cloneNode(true);
   mainElement.append(templateStatusMessage);
-
-}
+};
 
 
 // сообщение об успешной отправке
 
-const showGoodSendMessage = function() {
+const showGoodSendMessage = () => {
 
-  createStatusMessage(successMessageTemplate)
+  createStatusMessage(successMessageTemplate);
 
   let goodSendMessage = document.querySelector('.success');
 
-  document.addEventListener('keydown', function(evt) {
+  document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       goodSendMessage.remove()
     }
-  })
+  });
 
-  document.addEventListener('click', function() {
+  document.addEventListener('click', () => {
     goodSendMessage.remove()
-  })
-}
+  });
+};
 
 // сообщение об ошибке отправки
 
-const showBadSendMessage = function() {
+const showBadSendMessage = () => {
 
-  createStatusMessage(errorMessageTemplate)
+  createStatusMessage(errorMessageTemplate);
 
   let badSendMessage = document.querySelector('.error');
 
-  document.addEventListener('keydown', function(evt) {
+  document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       badSendMessage.remove()
     }
-  })
+  });
 
-  document.addEventListener('click', function() {
+  document.addEventListener('click', () => {
     badSendMessage.remove()
-  })
+  });
 
-  document.querySelector('.error__button').addEventListener('click', function(){
+  document.querySelector('.error__button').addEventListener('click', () => {
     badSendMessage.remove()
-  })
+  });
 
-}
+};
 
 // сообщение об ошибке получения данных
 
-const showBadReceiveMessage = function() {
+const showBadReceiveMessage = () => {
 
   const alertContainer = document.createElement('div');
 
@@ -160,11 +110,11 @@ const showBadReceiveMessage = function() {
 
 // очистка формы
 
-const resetForm = function() {
+const resetForm = () => {
   document.querySelector('.ad-form').reset()
   ADDRESS.value = `${LAT}, ${LNG}`;
-}
+};
 
-export {getRandomNumber, getRandomCoordinate, checkDuplicatesInArray, setInActive, setActive, showGoodSendMessage, showBadSendMessage, showBadReceiveMessage, resetForm}
+export {setInActive, setActive, showGoodSendMessage, showBadSendMessage, showBadReceiveMessage, resetForm};
 
 

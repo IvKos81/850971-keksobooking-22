@@ -5,14 +5,10 @@
 //Данные для загрузки файлов
 
 const avatarChooser = document.querySelector('.ad-form-header__input');
-
 const previewAvatar = document.querySelector('.ad-form-header__preview__avatar');
-
 const photoChooser = document.querySelector('.ad-form__input');
-
 const previewPhoto = document.querySelector('.ad-form__photo__pict');
-
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'bmp', 'png']
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'bmp', 'png'];
 
 // Функция загрузки аватара или фото помещения
 
@@ -22,7 +18,7 @@ const onLoadPhoto = (fileChooser, preview) => {
     const fileName = file.name.toLowerCase();
 
     const MATCHES = FILE_TYPES.some((it) => {
-      return fileName.endsWith(it)
+      return fileName.endsWith(it);
     });
 
     if (MATCHES) {
@@ -33,20 +29,20 @@ const onLoadPhoto = (fileChooser, preview) => {
       reader.readAsDataURL(file);
       preview.classList.remove('visually-hidden');
     }
-  })
-}
+  });
+};
 
 // Функция удаления фото при очистке формы
 
-const resetAvatar = function() {
+const resetAvatar = () => {
   previewAvatar.src = 'img/muffin-grey.svg';
   previewPhoto.src = '';
   previewPhoto.classList.add('visually-hidden');
-}
+};
 
 // Запуск загрузки фото на страницу
 
 onLoadPhoto(avatarChooser, previewAvatar);
 onLoadPhoto(photoChooser, previewPhoto);
 
-export {resetAvatar}
+export {resetAvatar};
