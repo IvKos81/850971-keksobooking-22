@@ -10,7 +10,7 @@ import {filterOffers} from './filter.js';
 //Данные для отрисовки карты
 
 const ADDRESS = document.querySelector('#address');
-const LAT = 35.681700;
+const LAT = 35.681710;
 const LNG = 139.75388;
 const LIMIT_OF_ADVERTS = 10;
 const MAP_SCALE = 12;

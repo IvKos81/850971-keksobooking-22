@@ -8,16 +8,16 @@ const avatarChooser = document.querySelector('.ad-form-header__input');
 const previewAvatar = document.querySelector('.ad-form-header__preview__avatar');
 const photoChooser = document.querySelector('.ad-form__input');
 const previewPhoto = document.querySelector('.ad-form__photo__pict');
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'bmp', 'png'];
+const FILES_TYPES = ['gif', 'jpg', 'jpeg', 'bmp', 'png'];
 
 // Функция загрузки аватара или фото помещения
 
-const onLoadPhoto = (fileChooser, preview) => {
+const loadPhoto = (fileChooser, preview) => {
   fileChooser.addEventListener('change', () => {
     const file = fileChooser.files[0];
     const fileName = file.name.toLowerCase();
 
-    const MATCHES = FILE_TYPES.some((it) => {
+    const MATCHES = FILES_TYPES.some((it) => {
       return fileName.endsWith(it);
     });
 
@@ -42,7 +42,7 @@ const resetAvatar = () => {
 
 // Запуск загрузки фото на страницу
 
-onLoadPhoto(avatarChooser, previewAvatar);
-onLoadPhoto(photoChooser, previewPhoto);
+loadPhoto(avatarChooser, previewAvatar);
+loadPhoto(photoChooser, previewPhoto);
 
 export {resetAvatar};

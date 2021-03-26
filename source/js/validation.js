@@ -9,6 +9,10 @@ const DEFAULT_PRICE = 5000;
 const MIN_NAME_LENGTH = 30;
 const MAX_NAME_LENGTH = 100;
 const MAX_PRICE = 1000000;
+const BUNGALOW_MIN_PRICE = 0;
+const FLAT_MIN_PRICE = 1000;
+const HOUSE_MIN_PRICE = 5000;
+const PALACE_MIN_PRICE = 10000;
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
 const roomNumber = document.querySelector('#room_number');
@@ -30,16 +34,16 @@ const checkAdvertTitleValidation = () => {
 // Валидация цены за ночь
 
 const checkAccomodationPriceValidation = () => {
-  if (accomodationType.value === 'bungalow' && accomodationPrice.value < 0) {
+  if (accomodationType.value === 'bungalow' && accomodationPrice.value < BUNGALOW_MIN_PRICE) {
     accomodationPrice.setCustomValidity('Минимальная цена не может быть ниже 0 рублей');
   }
-  else if (accomodationType.value === 'flat' && accomodationPrice.value < 1000) {
+  else if (accomodationType.value === 'flat' && accomodationPrice.value < FLAT_MIN_PRICE) {
     accomodationPrice.setCustomValidity('Минимальная цена не может быть ниже 1000 рублей');
   }
-  else if (accomodationType.value === 'house' && accomodationPrice.value < 5000) {
+  else if (accomodationType.value === 'house' && accomodationPrice.value < HOUSE_MIN_PRICE) {
     accomodationPrice.setCustomValidity('Минимальная цена не может быть ниже 5000 рублей');
   }
-  else if (accomodationType.value === 'palace' && accomodationPrice.value < 10000) {
+  else if (accomodationType.value === 'palace' && accomodationPrice.value < PALACE_MIN_PRICE) {
     accomodationPrice.setCustomValidity('Минимальная цена не может быть ниже 10000 рублей');
   }
   else if (accomodationPrice.value > MAX_PRICE) {
